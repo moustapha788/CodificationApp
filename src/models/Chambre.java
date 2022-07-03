@@ -93,7 +93,7 @@ public class Chambre {
 
     @Override
     public String toString() {
-        return "Chambre [, id=" + id + ", numeroChambre=" + numeroChambre + ", numeroEtage="
+        return "Chambre [ id=" + id + ", numeroChambre=" + numeroChambre + ", numeroEtage="
                 + numeroEtage + ", typeChambre=" + typeChambre + ", etat=" + etat+"]";
     }
 

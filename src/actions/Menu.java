@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 import IServices.IService;
 import Services.ServiceTableau;
+import models.Chambre;
 import models.Pavillon;
+import models.TypeChambre;
 
 public class Menu {
     private int response;
-    private int nbrPav;
-    
+    private int quitter;
+    // private int nbrPav;
+
     private int indexMenu;
     private final int TAILLE_MENU = 10;
     private String[] itemsMenu = new String[TAILLE_MENU];
@@ -19,7 +22,7 @@ public class Menu {
             itemsMenu[indexMenu] = item;
             indexMenu++;
         } else {
-            System.out.println("le tableau de menu est plein");
+            System.out.println("--LE TABLEAU DE MENU EST PLEIN--");
         }
     }
 
@@ -32,83 +35,76 @@ public class Menu {
     }
 
     public void mainMenu() {
-        this.showItemMenu();
-        System.out.println("\n Saisir les chiffres corresponant à chacun de ces items pour y accéder: ");
-        IService service = new ServiceTableau();
-        Scanner sc = new Scanner(System.in);
+        try (Scanner sc = new Scanner(System.in)) {
+            do {
 
-        do {
-            this.response = sc.nextInt();
-            if (this.response < 0) {
-                System.out.println("Désolé pas de nombre négatif");
-            }
-            if (this.response > itemsMenu.length) {
-                System.out.println("Désolé Vous dépasser le nombre de menus");
-            }
-        } while (this.response < 0 || this.response > itemsMenu.length);
-        switch (response) {
-            case 1:
-                System.out.println("VOUS VOULEZ AJOUTER UN PAVILLON");
-                System.out.println("Renseigner le nombre de pavillon à créer");
-              
+                this.showItemMenu();
+                System.out.print("\n--Saisir les chiffres corresponant à chacun de ces items pour y accéder: ");
+                IService service = new ServiceTableau();
                 do {
-                    this.nbrPav = sc.nextInt();
-
-                    if (this.nbrPav < 0) {
-                        System.out.println("Désolé pas de nombre négatif");
+                    this.response = sc.nextInt();
+                    if (this.response < 0) {
+                        System.out.println("DÉSOLÉ PAS DE NOMBRE NÉGATIF , Renseignez de nouveau");
                     }
-                    if (this.nbrPav > ServiceTableau.indexChambre) {
-                        System.out.println("Désolé nous avons pas assez d'espace pour ces chambres");
-                        System.out.println("nombre de chambres disponibles "+ (ServiceTableau.TAILLE_PAVILLON - ServiceTableau.indexChambre));
+                    if (this.response > itemsMenu.length) {
+                        System.out.println("DÉSOLÉ VOUS DÉPASSER LE NOMBRE DE MENUS DÉFINI , Renseignez de nouveau");
                     }
-                    System.out.println("Renseigner de nouveau le nombre de pavillon à créer");
-                    
-                } while (this.nbrPav < 0 || this.nbrPav > ServiceTableau.indexChambre);
-                for (int i = 0; i < nbrPav; i++) {
-                    System.out.println("Renseignez le nombre d'étages");
-                    int nbrEtages = sc.nextInt();
+                } while (this.response < 0 || this.response > itemsMenu.length);
+                switch (response) {
+                    case 1:
+                        System.out.println("\n--AJOUT DE PAVILLON--\n");
+                        System.out.print("Renseignez le nombre d'étages: ");
+                        int nbrEtages = sc.nextInt();
 
-                    Pavillon pavillon = new Pavillon(nbrEtages);
-                    service.addPavillon(pavillon);
+                        Pavillon pavillon = new Pavillon(nbrEtages);
+                        service.addPavillon(pavillon);
+                        break;
+                    case 2:
+                        service.showPavillons();
+                        break;
+                    case 3:
+                        System.out.println("--AJOUT DE CHAMBRE--");
+                        System.out.println("--Renseignez le type de chambre en tapant le numéro correspondant. TAPEZ");
+                        System.out.println("\t-1 pour INDIVIDUEL");
+                        System.out.println("\t-autre numéro COLLECTIF");
+                        int typeChoice = sc.nextInt();
+                        TypeChambre typeChambre = TypeChambre.INDIVIDUEL;
+                        if (typeChoice == 2) {
+                            typeChambre = TypeChambre.COLLECTIF;
+                        }
+                        Chambre chambre = new Chambre(typeChambre);
+                        service.addRoom(chambre);
+                        break;
+                    case 4:
+                        service.showRooms();
+                        break;
+                    case 5:
+                        System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
+                        break;
+                    case 6:
+                        System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
+                        break;
+                    case 7:
+                        System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
+                        break;
+                    case 8:
+                        System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
+                        break;
+                    case 9:
+                        System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
+                        break;
+                    case 10:
+                        System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
+                        break;
+                    default:
+                        System.out.println("LA SAISIE EST INVALIDE:");
+                        break;
                 }
-
-                break;
-            case 2:
-                System.out.println("VOUS VOULEZ LISTER LES PAVILLONS");
-                service.showPavillons();
-                break;
-            case 3:
-                System.out.println("VOUS VOULEZ AJOUTER UNE CHAMBRE");
-                break;
-            case 4:
-                System.out.println("VOUS VOULEZ LISTER LES CHAMBRES");
-                break;
-            case 5:
-                System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
-                break;
-            case 6:
-                System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
-                break;
-            case 7:
-                System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
-                break;
-            case 8:
-                System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
-                break;
-            case 9:
-                System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
-                break;
-            case 10:
-                System.out.println("CE MENU N'EST PAS ENCORE DÉFINI REVENEZ ULTÉRIEUREMENT");
-                break;
-            case 11:
-                System.out.println("VOUS VOULEZ QUITTER appuie sur 1 pour confirmer  et 0 pour annuler");
-                break;
-            default:
-                System.out.println("LA SAISIE EST INVALIDE:");
-                break;
+                System.out.println(
+                        "\n--Si vous voulez quitter appuie sur ...\n\t1 pour confirmer  \n\tet \n\t0 pour annuler");
+                this.quitter = sc.nextInt();
+            } while (this.quitter != 1);
         }
-
     }
 
 }
