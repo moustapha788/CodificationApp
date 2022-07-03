@@ -1,12 +1,22 @@
 package models;
 
 public class Chambre {
-    /**
-     ** Default constructor
-     */
-    public Chambre() {
-    }
 
+    /**
+     * @param id
+     * @param numeroChambre
+     * @param numeroEtage
+     * @param etat
+     */
+   
+    public Chambre(TypeChambre typeChambre) {
+        this.typeChambre = typeChambre;
+        countRoom++;
+    }
+    /**
+     ** nombre de Pavillons
+     */
+    public static int countRoom = 0;
     /**
      ** identifier
      */
@@ -46,23 +56,47 @@ public class Chambre {
         this.numeroEtage = numeroEtage;
     }
 
+    private TypeChambre typeChambre;
+
+    public TypeChambre getTypeChambre() {
+        switch (typeChambre) {
+            case INDIVIDUEL:
+                typeChambre = TypeChambre.INDIVIDUEL;
+                break;
+            case COLLECTIF:
+                typeChambre = TypeChambre.COLLECTIF;
+                break;
+            default:
+                System.out.println("désolé ce type n'existe pas");
+                break;
+        }
+        return typeChambre;
+
+    }
+
+    public void setTypeChambre(TypeChambre typeChambre) {
+        this.typeChambre = typeChambre;
+    }
+
     /**
      ** etat de la chambre
      */
-    private int etat = 1;
+    private boolean etat = true;
 
-    public int getEtat() {
+    public boolean isEtat() {
         return etat;
     }
 
-    public void setEtat(int etat) {
+    public void setEtat(boolean etat) {
         this.etat = etat;
     }
 
     @Override
     public String toString() {
-        return "Chambre [etat=" + etat + ", id=" + id + ", numeroChambre=" + numeroChambre + ", numeroEtage="
-                + numeroEtage + "]\n";
+        return "Chambre [, id=" + id + ", numeroChambre=" + numeroChambre + ", numeroEtage="
+                + numeroEtage + ", typeChambre=" + typeChambre + ", etat=" + etat+"]";
     }
+
+  
 
 }

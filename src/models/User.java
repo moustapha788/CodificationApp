@@ -2,6 +2,12 @@ package models;
 
 public abstract class User extends Personne {
 
+    public User(String nom, String prenom, String email, String password) {
+        super(nom, prenom);
+        this.email = email;
+        this.password = password;
+    }
+
     /**
      ** email de l'utilisateur
      */

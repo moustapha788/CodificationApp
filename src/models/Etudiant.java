@@ -3,13 +3,27 @@ package models;
 import java.util.Date;
 
 public class Etudiant extends Personne {
+
     /**
-     ** Default constructor
+     * @param nom
+     * @param prenom
+     * @param etat
+     * @param matricule
+     * @param email
+     * @param dateDeNaissance
+     * @param telephone
+     * @param adresse
      */
-    public Etudiant() {
+    public Etudiant(String nom, String prenom, int etat, String matricule, String email, Date dateDeNaissance,
+            String telephone, String adresse) {
+        super( nom, prenom);
+        this.matricule = matricule;
+        this.email = email;
+        this.dateDeNaissance = dateDeNaissance;
+        this.telephone = telephone;
+        this.adresse = adresse;
+        
     }
-
-
     /**
      ** matricule de l'étudiant
      */
@@ -17,11 +31,7 @@ public class Etudiant extends Personne {
 
     public String getMatricule() {
         return matricule;
-        
-    }
 
-    public void setMatricule(String matricule) {
-        this.matricule = matricule;
     }
 
     /**
@@ -82,15 +92,17 @@ public class Etudiant extends Personne {
      * @return Responsable
      */
 
-    public Responsable getResponsable() {
+    // public Responsable getResponsable() {
 
-        return new Responsable();
-    }
+    // return new Responsable();
+    // }
 
     @Override
     public String toString() {
         return "Etudiant [adresse=" + adresse + ", dateDeNaissance=" + dateDeNaissance + ", email=" + email
                 + ", matricule=" + matricule + ", telephone=" + telephone + "]\n";
     }
+
+    
 
 }

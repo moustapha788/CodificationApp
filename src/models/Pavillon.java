@@ -2,15 +2,18 @@ package models;
 
 public class Pavillon {
     /**
-     ** Default constructor
+     * @param nombreEtage
      */
-    public Pavillon() {
+    public Pavillon(int nombreEtage) {
+
+        this.nombreEtage = nombreEtage;
+        countPav++;
     }
 
     /**
      ** identifier
      */
-    private int id;
+    private int id = countPav;
 
     public int getId() {
         return id;
@@ -19,6 +22,11 @@ public class Pavillon {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     ** nombre de Pavillons
+     */
+    public static int countPav = 0;
 
     /**
      ** numéro du pavillon
@@ -49,19 +57,23 @@ public class Pavillon {
     /**
      ** état du pavillon
      */
-    private int etat = 1;
+    private boolean etat = true;
 
-    public int getEtat() {
+    public boolean isEtat() {
         return etat;
     }
 
-    public void setEtat(int etat) {
+    public void setEtat(boolean etat) {
         this.etat = etat;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "Pavillon [etat=" + etat + ", id=" + id + ", nombreEtage=" + nombreEtage + ", numero=" + numero + "]\n";
+        return "Pavillon [ id=" + id + ", nombreEtage=" + nombreEtage + ", numero=" + numero + " , etat=" + etat + "]";
     }
-
 }

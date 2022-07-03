@@ -1,11 +1,7 @@
 package models;
 
 public class AnneeScolaire {
-    /**
-     ** Default constructor
-     */
-    public AnneeScolaire() {
-    }
+    
 
     /**
      ** identifier
@@ -25,6 +21,14 @@ public class AnneeScolaire {
      */
     private String libelleAnnee;
 
+    /**
+     * @param id
+     * @param libelleAnnee
+     */
+    public AnneeScolaire(String libelleAnnee) {
+        this.libelleAnnee = libelleAnnee;
+    }
+
     public String getLibelleAnnee() {
         return libelleAnnee;
     }
@@ -36,5 +40,15 @@ public class AnneeScolaire {
     @Override
     public String toString() {
         return "AnneeScolaire [id=" + id + ", libelleAnnee=" + libelleAnnee + "]\n";
+    }
+
+    private boolean etat = true;
+
+    public boolean isEtat() {
+        return etat;
+    }
+
+    public void setEtat(boolean etat) {
+        this.etat = etat;
     }
 }

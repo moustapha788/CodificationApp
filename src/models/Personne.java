@@ -2,6 +2,16 @@ package models;
 
 public abstract class Personne {
     /**
+     * @param nom
+     * @param prenom
+     * @param etat
+     */
+    public Personne(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
+    /**
      ** identifiant de la personne
      */
     protected int id;
@@ -13,6 +23,13 @@ public abstract class Personne {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     **le nombre de personnes créées
+     */
+    public static int countPerson=0;
+
+    
 
     /**
      ** nom de la personne
@@ -43,13 +60,14 @@ public abstract class Personne {
     /**
      ** l'état de la personne
      */
-    protected int etat = 1;
+    protected boolean etat = true;
 
-    public int getEtat() {
+   
+    public boolean isEtat() {
         return etat;
     }
 
-    public void setEtat(int etat) {
+    public void setEtat(boolean etat) {
         this.etat = etat;
     }
 
